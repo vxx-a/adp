@@ -5,6 +5,7 @@
 - Mutation testing
 - Separate branch / worktree
 - Unit tests
+- Code review
 
 ## Security
 
