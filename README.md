@@ -19,4 +19,5 @@ Early design. The working notes are in [docs/NOTES.md](docs/NOTES.md).
 |---|---|
 | `AGENTS.md` | Rules for agents working on this repo (not the template that gets shipped) |
 | `.claude/CLAUDE.md` | Points Claude Code at `AGENTS.md` |
+| `template/` | What gets exported into a new project's root |
 | `docs/` | Documentation |
