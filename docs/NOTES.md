@@ -10,7 +10,7 @@
 ## Security
 
 - claude-red
-- Penetration testing
+- Pre-release penetration testing
 
 ## Development
 
@@ -24,6 +24,7 @@
 
 - Deployment scripts
 - Testing
+- Production / pre-production / development
 
 ## Modules
 
@@ -64,6 +65,9 @@
 - `.agents/` for skills, memory
 - Pipeline should live under separate repo clone
 - Versioning
+
+## Guidelines
+Agentic coding guidelines for humans
 
 ## Gaps and ideas
 
