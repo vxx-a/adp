@@ -2,10 +2,7 @@
 
 ## Testing
 
-- Mutation testing
-- Separate branch / worktree
-- Unit tests
-- Code review
+- [Testing workflow](../plan/testing/workflow.md): commit and release gates; individual plans for each testing step.
 
 ## Security
 
@@ -14,17 +11,23 @@
 
 ## Development
 
+- [Development completion](../plan/development/completion.md): next step after development; feature acceptance, release readiness, and deployment handoff.
 - First write docs for a plan, under `/plan`. Then follow the plan and document the codebase in `/docs`. Remove done items from the plan. Separate plan per scope or module, same for docs. General docs and plan in root, in depth per module.
 - Code should be self-explanatory and well defined. Comments only when code needs more context.
 - Prioritize lower reasoning with larger, richer prompts. Higher reasoning for less context.
 - Shared libs and protobufs; minimize code repetition.
 - Strict guidelines.
+- Do not rely on fallbacks.
+- No repetitions.
+- Explicit class design and diagrams showing interaction.
+- Readability, explicit naming of everything. (no o, t, p, etc..), use full words when mostly, shorten when it is completely clear what the short name implies. minimize comments.
 
 ## CI/CD
 
 - Deployment scripts
 - Testing
 - Production / pre-production / development
+- Future option: a nightly release stage after mutation testing, before full release. Decide later.
 
 ## Modules
 
@@ -40,9 +43,7 @@
 
 ## Skills
 
-- Testing skills
-  - Writing unit tests
-  - Mutation testing (branch of current worktree)
+- Testing skills: follow the [individual testing plans](../plan/testing/workflow.md#testing-steps).
 - Security skill
   - Audit
 - Development skills
@@ -50,6 +51,16 @@
   - Adjust for specific project needs
 - Pipeline update skill
 - Cleanup skill
+## GIT
+#### Pull requests
+- review pull requests and merge
+- run 2 independent reviewers on proposed changes
+#### Branches
+- release / main
+- dev 
+- feature-\[name]
+- `<dev-branch>-mutation-testing`: one per dev branch; merge back into its source after checks pass
+- Combined dev branches must pass checks as one release candidate before merging into release
 
 ## Documentation
 
@@ -58,6 +69,10 @@
 ## UI/UX
 
 - Figma
+- react + tailwind
+- react native
+- typeui
+- [aiux](https://www.aiuxplayground.com/skills)
 
 ## Pipeline
 
@@ -67,7 +82,13 @@
 - Versioning
 
 ## Guidelines
-Agentic coding guidelines for humans
+- [Human guidelines draft](../plan/guidelines/human-guidelines.md): product guidance for ADP users developing their own projects; intended to ship under `template/docs/`.
+
+## Monitoring
+- grafana
+
+## OPS
+- Include monitoring, ci/cd etc
 
 ## Gaps and ideas
 
