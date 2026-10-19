@@ -1,100 +1,77 @@
 # TODO
 
-What's done and what's left for ADP. Each step gets notes in `plan/<feature>/<step>.md` before its skill is built. Sources: `docs/NOTES.md` and the plans under `plan/`.
+Open ADP work. See [README](../README.md) for available functionality and [checks](../docs/checks.md) for local validation. Document missing steps before implementing them.
 
 ## Repo
 
-- [x] Repo scaffolding: `AGENTS.md`, `.claude/`, `.agents/`, `plan/`, `docs/`
-- [x] Repo memory index and first memories
-- [x] README and working notes (`docs/NOTES.md`)
-- [x] Ignore `.DS_Store`
-- [ ] `docs/`: describe how ADP works once pieces are built (only `NOTES.md` so far)
-- [ ] Decision records in `docs/decisions/`
+- [ ] Extend behavioral evaluations beyond the initial setup and partial-delivery fixtures as skills encounter real project cases.
 
-## Template (shipped product)
+## Template
 
-- [x] `template/AGENTS.md`, `template/.claude/CLAUDE.md`, `skills/` symlink, memory index
-- [ ] Replace the Code section of `template/AGENTS.md` with a pointer to the coding-rules skill
-- [ ] Split files into pipeline-owned (replaced on update) and project-owned (never touched)
-- [ ] Version stamp in each target project
-- [ ] Nested `AGENTS.md` per module
-- [ ] Model and effort defaults in each skill's frontmatter
-- [ ] Block agent access to `.env` and secret files in `.claude/settings.json`
+Follow the [file ownership plan](template/file-ownership.md).
+
+- [ ] Add a version stamp under `.agents/adp/` in target projects.
+- [ ] Extend setup to create or update nested `AGENTS.md` when modules need their own instructions.
+- [ ] Set model and effort defaults in skill frontmatter.
+- [ ] Add secret-file deny rules; settle ownership and merging of `.claude/settings.json`.
 
 ## Project start
 
-- [ ] Export script: copy `template/` into a project root
-- [ ] Setup notes (`plan/setup/`)
-  - [ ] Interactive Q&A: goals, description
-  - [ ] Where the project description file lives (open in architecture notes)
-  - [ ] Per-stack templates: formatter, linter, test commands, mutation tool
-  - [ ] Language-agnostic or not
-- [ ] Setup skill
+- [ ] Decide supported languages and per-stack tool/configuration templates.
+- [ ] Extend setup beyond baseline discovery with agreed per-stack configuration and CI integration.
 
 ## Development
 
-- [x] Architecture notes (`plan/development/architecture.md`)
-- [ ] Architecture skill
-- [ ] Program design notes: gRPC services, protobufs, layers, class design and interaction diagrams
-- [ ] Program design skill
-- [ ] Implementation notes: plan first, document, prune the plan
-- [ ] Implementation skill
-- [x] Coding rules notes (`plan/development/coding-rules.md`)
-- [ ] Coding rules skill
-- [x] Completion notes (`plan/development/completion.md`)
-  - [x] Point to the testing and security gates instead of restating their steps
-- [ ] Completion skill
-- [ ] Definition of done for development: acceptance criteria met, docs updated, plan item removed
+- [ ] Select project-specific contract checks and reliable generators where canonical artifacts support them; the generic reference checker and skill catalog are implemented.
 
 ## Testing
 
-- [x] Workflow and gates (`plan/testing/workflow.md`)
-- [x] Step notes: unit, integration, contract, end-to-end, UI, performance, mutation, static checks, code review
-- [ ] Decide before implementation
-  - [ ] Commands, environments, CI gates per stack
-  - [ ] Critical flows and release suite
-  - [ ] Mutation tool, threshold, allowed exclusions
-  - [ ] Performance targets
-- [ ] Testing skills, one per step
-- [ ] Two independent reviewers on proposed changes
+Draft: [workflow and steps](testing/workflow.md).
+
+- [ ] Set per-stack commands, environments, and CI gates; define critical flows and the release suite during project setup.
+- [ ] Choose mutation tools, thresholds, exclusions, and applicable performance targets.
+- [ ] Build the remaining testing skills from the step drafts; code review is shipped.
 
 ## Security
 
-- [ ] Security notes (`plan/security/`)
-  - [ ] Audit: code, dependency, image, secret checks
-  - [ ] claude-red
-  - [ ] Check commands and blocking policy
-  - [ ] Pre-release penetration testing: scope, staging only
-  - [ ] Supply chain scanning (Renovate, Trivy)
-  - [ ] Secrets approach for deployments
-- [ ] Security skill
+Drafts: [workflow](security/workflow.md), [guidelines](security/guidelines.md), [code review](security/code-review.md), [vulnerability search](security/vulnerability-search.md).
+
+- [ ] Review the drafts; settle per-stack checks, staging attack scope, secret storage, and credential lifecycle.
+- [ ] Build `adp-vulnerability-search`; select and bundle relevant Claude-Red skills. Shared guidance and `adp-security-code-review` are shipped.
+- [ ] Implement security checks, dependency/image scanning, PR reports, and staging breach scenarios through CI/CD.
+- [ ] Later: track, review, and incorporate Claude-Red upstream changes.
 
 ## Git
 
-- [ ] Git notes: branches (release/main, dev, feature-name, mutation branches), PR review and merge
-- [ ] Enforce rules with checks: Claude Code hooks, pre-commit, CI (module size warning, `buf lint`, `buf breaking`)
+Draft: [Git policy](ci-cd/git-policy.md).
+
+- [ ] Review the draft; settle branch protection, merge identity, release versioning, and enforcement of two independent reviewers.
+- [ ] Enforce security audit and verified fixes before other PR reviews.
+- [ ] Add Claude Code hooks and pre-commit checks; include module-size warnings and applicable protobuf checks (`buf lint`, `buf breaking`).
 
 ## CI/CD and ops
 
-- [ ] CI/CD notes: deploy scripts, environments (dev, staging, prod), rollback
-  - [ ] Release merge, deploy, smoke-check, monitoring, rollback per environment
-- [ ] Decide on a nightly release stage after mutation testing
-- [ ] Local dev loop with docker compose
-- [ ] Observability: logs, metrics, tracing (OpenTelemetry), health and readiness probes, Grafana
+Drafts: [CI/CD workflow](ci-cd/workflow.md), [deployment and recovery](ci-cd/deployment.md).
+
+- [ ] Review the drafts; choose provider, environments, commands, permissions, operational owners, and evidence retention.
+- [ ] Implement candidate checks, immutable artifact builds/promotion, provenance, release records, and deployment verification using the testing and security gates.
+- [ ] Implement deployment scripts, migrations, smoke checks, backups, and tested recovery; settle thresholds and recovery targets.
+- [ ] Define the local dev loop with Docker Compose and observability with OpenTelemetry, health/readiness probes, and Grafana.
+- [ ] Later: decide whether to add a nightly release stage after mutation testing.
 
 ## UI/UX
 
-- [ ] UI/UX notes: Figma, React + Tailwind, React Native, typeui, aiux skills
+Drafts: [guidelines](ui-ux/guidelines.md), [workflow](ui-ux/workflow.md), [design system](ui-ux/design-system.md).
+
+- [ ] Review the drafts and decide skill boundaries, reusing development and testing skills where appropriate.
+- [ ] Ship the guidelines and build agreed skills; evaluate supported platforms, project-selected tools/services, and unavailable-tool behavior.
 
 ## Pipeline maintenance
 
-- [ ] Pipeline update skill
-- [ ] Cleanup skill
-- [ ] Measure efficiency: cost and tokens per task, rework rate, bugs reaching production
-- [ ] Evals for skills
+- [ ] Build pipeline update and cleanup skills.
+- [ ] Measure cost/tokens per task, rework, and production defects; add skill evals.
+- [ ] Evaluate every skill against the [collaboration review cases](guidelines/agent-collaboration.md#review-cases).
 
 ## Guidelines
 
-- [x] Human guidelines draft (`plan/guidelines/human-guidelines.md`)
-- [ ] Review and agree on the draft
-- [ ] Ship it as `template/docs/human-guidelines.md`
+- [ ] Review the [human guidelines draft](guidelines/human-guidelines.md), settle its shipping path under the file ownership plan, and ship it.H

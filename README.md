@@ -1,35 +1,19 @@
 # ADP: Agentic Development Pipeline
 
-A reusable pipeline for building projects with coding agents. It is a set of rules, skills, and scripts that you export into a target project to make agent-driven development faster and more consistent.
+Rules, skills, and scripts installed into a project and run by its existing coding agent. Only `template/` is exported.
 
-## Scope
+## Use
 
-ADP equips the coding agent you already work with to initialize a project and run the skills you request. Each skill supplies the rules, inputs, and outputs for its step. For example, the agent reads the architecture skill to learn how to design the project's architecture.
+1. Clone ADP next to your project.
+2. Preview `python3 export.py /path/to/project`, then apply with `--apply`. Export preserves existing project files and rejects differing installed ADP files; updates are not implemented.
+3. Explicitly invoke `adp-setup`. It creates or amends project instructions and establishes requirements, affected project context, document locations, and check commands.
+4. Use the relevant [skill](template/.agents/adp/skills.md) for the agreed step. One owner coordinates; independent reviewers inspect decisions and results.
 
-The shipped product lives in `template/`: project rules, skills, supporting files, and human guidelines for people using ADP in their projects. Human guidelines explain how to develop those projects with ADP.
+The [workflow](template/.agents/adp/development.md) requires concrete design in `plan/` before code changes. Current docs describe implemented behavior. Work stops at the authorized step boundary unless continuation was explicitly authorized.
 
-Work on ADP itself uses this repo's root `AGENTS.md`, `.agents/`, and `.claude/`. Root `plan/` holds product drafts and development plans; root `docs/` describes ADP's design and implementation. These directories are not exported into target projects.
+## Documentation
 
-## Status
+- [Checks](docs/checks.md): local commands and supported reference syntax.
+- [Plans](plan/TODO.md): remaining work and decisions.
 
-Early design. The working notes are in [docs/NOTES.md](docs/NOTES.md).
-
-Review the [human guidelines draft](plan/guidelines/human-guidelines.md) for people using ADP in their own projects. Once agreed, it will ship under `template/docs/`.
-
-## How it's meant to work
-
-1. Clone ADP next to your project. It lives in its own repo.
-2. Run the export script to copy the pipeline into the project root.
-3. Ask your agent to run the setup skill. It asks about your goals in an interactive Q&A and adapts the pipeline to the project.
-4. Ask your agent to run the relevant bundled skills for testing, security, development, pipeline updates, and cleanup.
-
-## Layout
-
-| Path | Purpose |
-|---|---|
-| `AGENTS.md` | Rules for agents working on this repo (not the template that gets shipped) |
-| `.claude/CLAUDE.md` | Points Claude Code at `AGENTS.md` |
-| `.agents/` | Skills and memory for working on ADP itself |
-| `template/` | What gets exported into a new project's root |
-| `plan/` | Product drafts and plans for developing ADP |
-| `docs/` | ADP design and implementation documentation |
+Root `AGENTS.md`, `.claude/`, and `.agents/` configure agents developing ADP. Root `docs/`, `plan/`, `scripts/`, and `tests/` do not ship. The [human guide](plan/guidelines/human-guidelines.md) remains a draft with its shipping location undecided.
