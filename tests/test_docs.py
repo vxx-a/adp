@@ -7,7 +7,7 @@ import unittest
 from unittest import mock
 
 
-SCRIPT = Path(__file__).resolve().parents[1] / "template/.agents/adp/scripts/check_docs.py"
+SCRIPT = Path(__file__).resolve().parents[1] / "product/scripts/check_docs.py"
 spec = importlib.util.spec_from_file_location("check_docs", SCRIPT)
 checker = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(checker)
